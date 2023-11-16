@@ -26,7 +26,7 @@ const router = createBrowserRouter([
         element: <ChurrasList />,
       },
       {
-        path: "/detalhe",
+        path: "/new",
         element: <ChurrasDetail />,
       },
     ],

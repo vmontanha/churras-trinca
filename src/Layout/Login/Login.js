@@ -1,6 +1,6 @@
 import React from 'react'
 import './Login.css'
-import { Form, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const Login = () => {
   return (
@@ -16,7 +16,7 @@ const Login = () => {
         </div>
       </div>
       <div className='box__button'>
-        <Link className='button__submit' to='/detalhe'>Enviar</Link>
+        <Link className='button__submit' to='/new'>Enviar</Link>
       </div>
     </div>
 
