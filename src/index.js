@@ -23,11 +23,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/agenda",
-        element: <ChurrasList />,
+        element: <ChurrasDetail />,
       },
       {
         path: "/new",
-        element: <ChurrasDetail />,
+        element: <ChurrasList />,
       },
     ],
     errorElement: <ErrorPage />,

@@ -1,8 +1,9 @@
 import React from 'react'
+import DetalheChurras from '../Layout/DetalheChurras/DetalheChurras'
 
 const ChurrasList = () => {
   return (
-    <h1>ChurrasList</h1>
+    <DetalheChurras />
   )
 }
 

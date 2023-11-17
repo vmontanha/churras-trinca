@@ -1,0 +1,123 @@
+.container__list {
+  display: block;
+  position: relative;
+  top: -61px;
+  background-color: #fff;
+  border-radius: 2px;
+  padding: 22px;
+  width: 78%;
+  height: auto;
+  margin-right: auto;
+  margin-left: auto;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.06);
+}
+
+.box__date {
+  width: 100%;
+  margin-right: auto;
+}
+
+.box__date h3 {
+  color: #000;
+  font-family: Raleway bold;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+
+}
+
+.box__date h1 {
+  color: rgba(0, 0, 0, 0.80);
+  font-family: Raleway Bold;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+}
+
+.qtd__people {
+  display: flex;
+  align-items: center;
+  width: 85px;
+}
+
+.box__date p {
+  color: #000;
+  text-align: center;
+  font-family: Raleway-Thin;
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+}
+
+.box__people img {
+  margin-right: 6px;
+}
+
+.box__people {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.under__style {
+  border-bottom: 1px solid #E5C231;
+}
+
+.title {
+  margin-top: -40px;
+}
+
+
+input[type=checkbox] {
+  position: relative;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  margin-right: 19px;
+
+}
+
+label {
+  color: rgba(0, 0, 0, 0.80);
+  font-family: Raleway Bold;
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.checkmark {
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  left: 20px;
+  border-radius: 50%;
+  border: 2px solid #998220;
+}
+
+input:checked~.checkmark {
+  background-color: #FFD836;
+  border: none;
+}
+
+.money {
+  color: rgba(0, 0, 0, 0.80);
+  font-family: Raleway Bold;
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.check {
+  text-decoration: line-through
+}

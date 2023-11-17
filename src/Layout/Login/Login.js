@@ -12,11 +12,11 @@ const Login = () => {
         </div>
         <div className='box__input'>
           <h2>Senha</h2>
-          <input type='text' placeholder='senha' />
+          <input type='password' placeholder='senha' />
         </div>
       </div>
       <div className='box__button'>
-        <Link className='button__submit' to='/new'>Enviar</Link>
+        <Link className='button__submit' to='/agenda'>Enviar</Link>
       </div>
     </div>
 
