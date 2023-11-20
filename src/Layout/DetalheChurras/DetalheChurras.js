@@ -1,14 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import iconPeople from '../../assets/img/icon_people.png'
 import iconMoney from '../../assets/img/icon_money.png'
 import '../DetalheChurras/DetalheChurras.css'
+import { v4 as uuidv4 } from "uuid";
 
-const DetalheChurras = () => {
+import { Input } from '@mui/material';
+
+const DetalheChurras = ({ input, setInput, todos, setTodos }) => {
+
+  const handleChange = (e) => setInput(e.target.value);
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setTodos(input)
+    const newChurras = localStorage.setItem("todos", JSON.stringify(todos));
+    setTodos(newChurras)
+  };
+
+  console.log(todos)
   return (
     <div className='container__list'>
       <div className='box__people'>
         <div className='box__date'>
-          <h3>01/12</h3>
+          <h3>01/02</h3>
         </div>
         <div className='qtd__people'>
           <img src={iconPeople} alt='people' />
@@ -17,7 +32,11 @@ const DetalheChurras = () => {
       </div>
       <div className='box__people title'>
         <div className='box__date'>
-          <h1>Niver do Gui</h1>
+          <Input
+            value={input}
+            onBlur={handleSubmit}
+            onChange={handleChange}
+            className='input-title' />
         </div>
         <img src={iconMoney} alt='people' />
         <p>R$280</p>

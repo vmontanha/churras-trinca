@@ -20,17 +20,27 @@
   margin-right: auto;
 }
 
-.box__date h3 {
+.box__date .input-date {
   color: #000;
   font-family: Raleway bold;
-  font-size: 28px;
+  font-size: 19px;
   font-style: normal;
   font-weight: 800;
   line-height: normal;
 
 }
 
-.box__date h1 {
+.box__date .input-title {
+  color: rgba(0, 0, 0, 0.80);
+  font-family: Raleway Bold;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+}
+
+.box__date h2 {
   color: rgba(0, 0, 0, 0.80);
   font-family: Raleway Bold;
   font-size: 36px;
@@ -72,9 +82,13 @@
   border-bottom: 1px solid #E5C231;
 }
 
-.title {
-  margin-top: -40px;
+.input-title::before,
+.input-title::after,
+.input-date::after,
+.input-date::before {
+  border: none !important;
 }
+
 
 
 input[type=checkbox] {

@@ -1,9 +1,9 @@
 import React from 'react'
-import CriarChurras from '../components/CriarChurras/CriarChurras'
+import Churras from '../Layout/CriarChurras/Churras'
 
 const ChurasDetail = () => {
   return (
-    <CriarChurras />
+    <Churras />
   )
 }
 
