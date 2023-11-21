@@ -9,8 +9,9 @@ import { Link } from 'react-router-dom';
 
 const DetalheChurras = () => {
 
-  const [churras, setChurras] = useState({ data: '', title: '' })
-  const [totalPeople, setTotalPeople] = useState(0);
+  const [churras, setChurras] = useState('')
+  const [title, setTitle] = useState('')
+  const [date, setDate] = useState('')
 
   const [checkedState, setCheckedState] = useState(
     new Array(people.length).fill(false)
@@ -25,43 +26,60 @@ const DetalheChurras = () => {
 
     setCheckedState(updatedCheckedState);
 
-
     const totalPrice = updatedCheckedState.reduce(
       (sum, currentState, index) => {
         if (currentState === true) {
           return sum + people[index].price;
         }
+        setChurras({ ...churras, money: churras.money })
+        localStorage.setItem("churras_money", JSON.stringify(sum))
         return sum;
       },
       0
     );
 
-
-    setTotal(totalPrice);
+    setTotal(totalPrice)
   };
 
-  console.log(totalPeople)
+  const count = checkedState.filter(function (item) {
+    if (item === true) {
+      return true;
+    } else {
+      return false;
+    }
+  }).length;
 
-  const handleChangeData = (e) => {
-    let value = e.target.value;
-    setChurras({ data: value })
-  }
 
-  const handleChangeTitle = (e) => {
-    let value = e.target.value;
-    setChurras({ title: value })
-  }
+
+  localStorage.setItem("churras_people", JSON.stringify(count))
+
+
+
+  console.log(count)
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setChurras({ ...churras, title: churras.title })
-    localStorage.setItem("churras_title", JSON.stringify(churras))
+
+    const existingData = JSON.parse(localStorage.getItem('churras')) || [];
+    const newData = {
+      ...existingData,
+      title: title,
+    };
+
+    localStorage.setItem('churras', JSON.stringify(newData));
   };
 
   const handleSubmitData = (e) => {
     e.preventDefault();
-    setChurras({ ...churras, data: churras.data })
-    localStorage.setItem("churras_date", JSON.stringify(churras))
+
+    const existingData = JSON.parse(localStorage.getItem('churras')) || [];
+    const newData = {
+      ...existingData,
+      date: date,
+    };
+
+    localStorage.setItem('churras', JSON.stringify(newData));
   };
 
   return (
@@ -69,23 +87,23 @@ const DetalheChurras = () => {
       <div className='box__people'>
         <div className='box__date'>
           <Input
-            value={churras.data}
+            value={date}
             onBlur={handleSubmitData}
-            onChange={handleChangeData}
+            onChange={(e) => setDate(e.target.value)}
             className='input-data'
             placeholder='01/02' />
         </div>
         <div className='qtd__people'>
           <img src={iconPeople} alt='people' />
-          <p>{totalPeople}</p>
+          <p>{count}</p>
         </div>
       </div>
       <div className='box__people title'>
         <div className='box__date'>
           <Input
-            value={churras.title}
+            value={title}
             onBlur={handleSubmit}
-            onChange={handleChangeTitle}
+            onChange={(e) => setTitle(e.target.value)}
             className='input-title'
             placeholder='Niver do Vini' />
         </div>

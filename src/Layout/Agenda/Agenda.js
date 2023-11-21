@@ -8,41 +8,40 @@ import '../../components/CriarChurras/CriarChurras.css'
 const Agenda = () => {
 
   useEffect(() => {
-    localStorage.getItem('churras_date')
-    localStorage.getItem('churras_title')
+    localStorage.getItem('churras')
+    localStorage.getItem('churras_money')
+    localStorage.getItem('churras_people')
   }, []);
 
-  const churrasDate = JSON.parse(localStorage.getItem("churras_date"));
-  const churrasTitle = JSON.parse(localStorage.getItem("churras_title"));
+  const churras = JSON.parse(localStorage.getItem("churras"));
+  const churraMoney = JSON.parse(localStorage.getItem("churras_money"));
+  const churrasPeople = JSON.parse(localStorage.getItem("churras_people"));
 
-  console.log(churrasTitle)
+
   return (
     <>
-      {/* {
-        <div className='container__card'>
-          <div className='box__subtitle'>
-            <h2>{churrasDate.data}</h2>
-            <h2>{churrasTitle.title}</h2>
-          </div>
-        </div>
-      } */}
-      <div className='container__card white'>
-        <div className='box__title__agenda'>
-          <h2>01/02</h2>
-          <h3>Niver Gui</h3>
-        </div>
-        <div className='box__dados'>
-          <div className='box__people__money__agenda'>
-            <img src={iconPeople} alt='people' />
-            <p>15</p>
-          </div>
-          <div className='box__people__money__agenda'>
-            <img src={iconMoney} alt='people' />
-            <p>R$ 280,00</p>
-          </div>
-
-        </div>
-      </div >
+      {
+        Array.from(localStorage.key).map((index) => {
+          return (
+            <div className='container__card white' key={index}>
+              <div className='box__title__agenda'>
+                <h2>{churras.date}</h2>
+                <h3>{churras.title}</h3>
+              </div>
+              <div className='box__dados'>
+                <div className='box__people__money__agenda'>
+                  <img src={iconPeople} alt='people' />
+                  <p>{churrasPeople}</p>
+                </div>
+                <div className='box__people__money__agenda'>
+                  <img src={iconMoney} alt='people' />
+                  <p>{churraMoney}</p>
+                </div>
+              </div>
+            </div >
+          )
+        })
+      }
     </>
   )
 }
