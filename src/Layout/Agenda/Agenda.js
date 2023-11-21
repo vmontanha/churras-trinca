@@ -1,26 +1,25 @@
 import React, { useEffect, useState } from 'react'
 
-const Agenda = ({ todos, setTodos }) => {
-
-  const [savedData, setSavedData] = useState({})
+const Agenda = () => {
 
   useEffect(() => {
-    const saved = localStorage.getItem("todos")
-  }, [setSavedData])
+    localStorage.getItem('churras')
+  }, []);
 
+  const churrasNow = JSON.parse(localStorage.getItem("churras"));
+  console.log(churrasNow)
 
   return (
     <div className='warp__list'>
       {
-        !savedData ? '' :
-          savedData.map((churras) => (
-            <div className='container__card'>
-              <div className='box__subtitle'>
-                <h2 key={churras}>{churras}</h2>
-              </div>
-            </div>
-          ))
+        <div className='container__card'>
+          <div className='box__subtitle'>
+            <h2>{churrasNow}</h2>
+          </div>
+        </div>
+
       }
+
 
     </div>
   )

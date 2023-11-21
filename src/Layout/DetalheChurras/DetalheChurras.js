@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import iconPeople from '../../assets/img/icon_people.png'
 import iconMoney from '../../assets/img/icon_money.png'
 import '../DetalheChurras/DetalheChurras.css'
-import { v4 as uuidv4 } from "uuid";
 
 import { Input } from '@mui/material';
 
@@ -10,15 +9,18 @@ const DetalheChurras = ({ input, setInput, todos, setTodos }) => {
 
   const handleChange = (e) => setInput(e.target.value);
 
+  var churras = ""
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setTodos(input)
-    const newChurras = localStorage.setItem("todos", JSON.stringify(todos));
-    setTodos(newChurras)
+    churras = input
+    localStorage.setItem("churras", JSON.stringify(churras))
   };
 
-  console.log(todos)
+  console.log(churras)
+
   return (
     <div className='container__list'>
       <div className='box__people'>

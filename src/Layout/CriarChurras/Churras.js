@@ -1,15 +1,12 @@
-import React from 'react'
-// import CriarChurras from '../../components/CriarChurras/CriarChurras'
+import React, { useState } from 'react'
+import CriarChurras from '../../components/CriarChurras/CriarChurras'
 import Agenda from '../Agenda/Agenda'
 
-const Churras = ({ todos, setTodos }) => {
+const Churras = ({ input }) => {
 
   return (
     <>
-      {/* <CriarChurras /> */}
-      <Agenda
-        todos={todos}
-        setTodos={setTodos} />
+      <Agenda input={input} />
     </>
   )
 }
