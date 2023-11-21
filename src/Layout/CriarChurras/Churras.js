@@ -1,13 +1,17 @@
-import React, { useState } from 'react'
+import React from 'react'
 import CriarChurras from '../../components/CriarChurras/CriarChurras'
 import Agenda from '../Agenda/Agenda'
+import '../../components/CriarChurras/CriarChurras.css'
 
-const Churras = ({ input }) => {
+const Churras = () => {
 
   return (
-    <>
-      <Agenda input={input} />
-    </>
+
+    <div className='warp__list'>
+      <Agenda />
+      <CriarChurras />
+    </div>
+
   )
 }
 

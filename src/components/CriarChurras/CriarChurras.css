@@ -10,7 +10,6 @@
 }
 
 .container__card {
-  max-width: 100%;
   background-color: #F1F1F1;
   height: auto;
   display: flex;
@@ -21,11 +20,12 @@
   transform: translate(0, -50px);
   border-radius: 2px;
   cursor: pointer;
+  width: 282px;
 }
 
 .box__icon {
   background-image: url(../../assets/img/Ellipse.png);
-  width: 100%;
+  width: auto;
   height: 100%;
   display: flex;
   justify-content: center;

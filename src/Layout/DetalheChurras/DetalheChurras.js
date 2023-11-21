@@ -1,13 +1,46 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import iconPeople from '../../assets/img/icon_people.png'
 import iconMoney from '../../assets/img/icon_money.png'
 import '../DetalheChurras/DetalheChurras.css'
+import { people } from '../../utils/people'
 
 import { Input } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const DetalheChurras = () => {
 
   const [churras, setChurras] = useState({ data: '', title: '' })
+  const [totalPeople, setTotalPeople] = useState(0);
+
+  const [checkedState, setCheckedState] = useState(
+    new Array(people.length).fill(false)
+  );
+
+  const [total, setTotal] = useState(0);
+
+  const handleOnChangePeople = (position) => {
+    const updatedCheckedState = checkedState.map((item, index) =>
+      index === position ? !item : item
+    );
+
+    setCheckedState(updatedCheckedState);
+
+
+    const totalPrice = updatedCheckedState.reduce(
+      (sum, currentState, index) => {
+        if (currentState === true) {
+          return sum + people[index].price;
+        }
+        return sum;
+      },
+      0
+    );
+
+
+    setTotal(totalPrice);
+  };
+
+  console.log(totalPeople)
 
   const handleChangeData = (e) => {
     let value = e.target.value;
@@ -39,11 +72,12 @@ const DetalheChurras = () => {
             value={churras.data}
             onBlur={handleSubmitData}
             onChange={handleChangeData}
-            className='input-data' />
+            className='input-data'
+            placeholder='01/02' />
         </div>
         <div className='qtd__people'>
           <img src={iconPeople} alt='people' />
-          <p>15</p>
+          <p>{totalPeople}</p>
         </div>
       </div>
       <div className='box__people title'>
@@ -52,138 +86,36 @@ const DetalheChurras = () => {
             value={churras.title}
             onBlur={handleSubmit}
             onChange={handleChangeTitle}
-            className='input-title' />
+            className='input-title'
+            placeholder='Niver do Vini' />
         </div>
         <img src={iconMoney} alt='people' />
-        <p>R$280</p>
+        <p>R${total}</p>
       </div>
-      <div className='box__people under__style'>
-        <div className='box__date'>
-          <input type='checkbox' />
-          <span className='checkmark'></span>
-          <label className='container__label'>Aline</label>
-        </div>
-        <p className='money'>R$20,00</p>
-      </div>
-      <div className='box__people under__style'>
-        <div className='box__date'>
-          <input type='checkbox' />
-          <span className='checkmark'></span>
-          <label className='container__label'>Beto</label>
-        </div>
-        <p className='money'>R$20,00</p>
-      </div>
-      <div className='box__people under__style'>
-        <div className='box__date'>
-          <input type='checkbox' />
-          <span className='checkmark'></span>
-          <label className='container__label'>Diego B.</label>
-        </div>
-        <p className='money'>R$20,00</p>
-      </div>
-      <div className='box__people under__style'>
-        <div className='box__date'>
-          <input type='checkbox' />
-          <span className='checkmark'></span>
-          <label className='container__label'>Diego P.</label>
-        </div>
-        <p className='money'>R$10,00</p>
-      </div>
-      <div className='box__people under__style'>
-        <div className='box__date'>
-          <input type='checkbox' />
-          <span className='checkmark'></span>
-          <label className='container__label'>Fernando</label>
-        </div>
-        <p className='money'>R$20,00</p>
-      </div>
-      <div className='box__people under__style'>
-        <div className='box__date'>
-          <input type='checkbox' checked='checked' />
-          <span className='checkmark'></span>
-          <label className='container__label'>Gabriel</label>
-        </div>
-        <p className='money check'>R$20,00</p>
-      </div>
-      <div className='box__people under__style'>
-        <div className='box__date'>
-          <input type='checkbox' />
-          <span className='checkmark'></span>
-          <label className='container__label'>Leonardo</label>
-        </div>
-        <p className='money'>R$10,00</p>
-      </div>
-      <div className='box__people under__style'>
-        <div className='box__date'>
-          <input type='checkbox' />
-          <span className='checkmark'></span>
-          <label className='container__label'>Marcus J.</label>
-        </div>
-        <p className='money'>R$20,00</p>
-      </div>
-      <div className='box__people under__style'>
-        <div className='box__date'>
-          <input type='checkbox' />
-          <span className='checkmark'></span>
-          <label className='container__label'>Aline</label>
-        </div>
-        <p className='money'>R$20,00</p>
-      </div>
-      <div className='box__people under__style'>
-        <div className='box__date'>
-          <input type='checkbox' />
-          <span className='checkmark'></span>
-          <label className='container__label'>Michele</label>
-        </div>
-        <p className='money'>R$20,00</p>
-      </div>
-      <div className='box__people under__style'>
-        <div className='box__date'>
-          <input type='checkbox' />
-          <span className='checkmark'></span>
-          <label className='container__label'>Paulo</label>
-        </div>
-        <p className='money'>R$20,00</p>
-      </div>
-      <div className='box__people under__style'>
-        <div className='box__date'>
-          <input type='checkbox' />
-          <span className='checkmark'></span>
-          <label className='container__label'>Rafael S.</label>
-        </div>
-        <p className='money'>R$20,00</p>
-      </div>
-      <div className='box__people under__style'>
-        <div className='box__date'>
-          <input type='checkbox' />
-          <span className='checkmark'></span>
-          <label className='container__label'>Ralf</label>
-        </div>
-        <p className='money'>R$20,00</p>
-      </div>
-      <div className='box__people under__style'>
-        <div className='box__date'>
-          <input type='checkbox' checked='checked' />
-          <span className='checkmark'></span>
-          <label className='container__label'>Ruan</label>
-        </div>
-        <p className='money'>R$20,00</p>
-      </div>
-      <div className='box__people under__style'>
-        <div className='box__date'>
-          <input type='checkbox' />
-          <span className='checkmark'></span>
-          <label className='container__label'>Thales</label>
-        </div>
-        <p className='money'>R$20,00</p>
-      </div>
-      <div className='box__people under__style'>
-        <div className='box__date'>
-          <input type='checkbox' />
-          <span className='checkmark'></span>
-          <label className='container__label'>Wait</label>
-        </div>
-        <p className='money'>R$20,00</p>
+      {
+        people.map(({ name, price }, index) => {
+          return (
+            <div className='box__people under__style' key={index}>
+              <div className='box__date'>
+                <input type='checkbox'
+                  checked={checkedState[index]}
+                  id={`custom-checkbox-${index}`}
+                  className={checkedState[index] ? "checked" : ""}
+                  onChange={() => handleOnChangePeople(index)}
+                  value={name}
+                />
+                <label className='container__label' htmlFor={`custom-checkbox-${index}`}>
+                  {name}
+                </label>
+              </div>
+              <p className={checkedState[index] ? "money check" : 'money'} >{`R$` + price + `,00`}</p>
+            </div>
+          );
+        })}
+      <div className='btn__back'>
+        <Link to={'/agenda'} >
+          <a>Voltar para Agenda</a>
+        </Link>
       </div>
     </div>
   )
