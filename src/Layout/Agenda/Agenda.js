@@ -3,23 +3,24 @@ import React, { useEffect, useState } from 'react'
 const Agenda = () => {
 
   useEffect(() => {
-    localStorage.getItem('churras')
+    localStorage.getItem('churras_date')
+    localStorage.getItem('churras_title')
   }, []);
 
-  const churrasNow = JSON.parse(localStorage.getItem("churras"));
-  console.log(churrasNow)
+  const churrasDate = JSON.parse(localStorage.getItem("churras_date"));
+  const churrasTitle = JSON.parse(localStorage.getItem("churras_title"));
 
+  console.log(churrasTitle)
   return (
     <div className='warp__list'>
       {
         <div className='container__card'>
           <div className='box__subtitle'>
-            <h2>{churrasNow}</h2>
+            <h2>{churrasDate.data}</h2>
+            <h2>{churrasTitle.title}</h2>
           </div>
         </div>
-
       }
-
 
     </div>
   )

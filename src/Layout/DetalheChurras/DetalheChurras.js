@@ -1,31 +1,45 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import iconPeople from '../../assets/img/icon_people.png'
 import iconMoney from '../../assets/img/icon_money.png'
 import '../DetalheChurras/DetalheChurras.css'
 
 import { Input } from '@mui/material';
 
-const DetalheChurras = ({ input, setInput, todos, setTodos }) => {
+const DetalheChurras = () => {
 
-  const handleChange = (e) => setInput(e.target.value);
+  const [churras, setChurras] = useState({ data: '', title: '' })
 
-  var churras = ""
+  const handleChangeData = (e) => {
+    let value = e.target.value;
+    setChurras({ data: value })
+  }
 
+  const handleChangeTitle = (e) => {
+    let value = e.target.value;
+    setChurras({ title: value })
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setTodos(input)
-    churras = input
-    localStorage.setItem("churras", JSON.stringify(churras))
+    setChurras({ ...churras, title: churras.title })
+    localStorage.setItem("churras_title", JSON.stringify(churras))
   };
 
-  console.log(churras)
+  const handleSubmitData = (e) => {
+    e.preventDefault();
+    setChurras({ ...churras, data: churras.data })
+    localStorage.setItem("churras_date", JSON.stringify(churras))
+  };
 
   return (
     <div className='container__list'>
       <div className='box__people'>
         <div className='box__date'>
-          <h3>01/02</h3>
+          <Input
+            value={churras.data}
+            onBlur={handleSubmitData}
+            onChange={handleChangeData}
+            className='input-data' />
         </div>
         <div className='qtd__people'>
           <img src={iconPeople} alt='people' />
@@ -35,9 +49,9 @@ const DetalheChurras = ({ input, setInput, todos, setTodos }) => {
       <div className='box__people title'>
         <div className='box__date'>
           <Input
-            value={input}
+            value={churras.title}
             onBlur={handleSubmit}
-            onChange={handleChange}
+            onChange={handleChangeTitle}
             className='input-title' />
         </div>
         <img src={iconMoney} alt='people' />
