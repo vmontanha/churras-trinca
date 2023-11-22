@@ -22,7 +22,7 @@ const router = createBrowserRouter([
         element: <LoginPage />,
       },
       {
-        path: "/new",
+        path: "/churras",
         element: <ChurrasList />,
       },
       {

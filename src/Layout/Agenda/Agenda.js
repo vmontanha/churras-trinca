@@ -9,15 +9,9 @@ const Agenda = () => {
 
   useEffect(() => {
     localStorage.getItem('churras')
-    localStorage.getItem('churras_money')
-    localStorage.getItem('churras_people')
   }, []);
 
   const churras = JSON.parse(localStorage.getItem("churras"));
-  const churraMoney = JSON.parse(localStorage.getItem("churras_money"));
-  const churrasPeople = JSON.parse(localStorage.getItem("churras_people"));
-
-  console.log(churras)
 
   if (!churras) return
 
@@ -34,11 +28,11 @@ const Agenda = () => {
               <div className='box__dados'>
                 <div className='box__people__money__agenda'>
                   <img src={iconPeople} alt='people' />
-                  <p>{churrasPeople}</p>
+                  <p>{item.people.length}</p>
                 </div>
                 <div className='box__people__money__agenda'>
-                  <img src={iconMoney} alt='people' />
-                  <p>{churraMoney}</p>
+                  <img src={iconMoney} alt='money' />
+                  <p>{item.money}</p>
                 </div>
               </div>
             </div >

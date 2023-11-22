@@ -8,7 +8,7 @@ const CriarChurras = () => {
   return (
 
     <div className='container__card'>
-      <Link to='/new'>
+      <Link to='/churras'>
         <div className='box__icon'>
           <img src={newChurrasIcon} alt='newChurrasIcon' />
         </div>
