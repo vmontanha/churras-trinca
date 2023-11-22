@@ -2,98 +2,51 @@ import React, { useState } from 'react'
 import iconPeople from '../../assets/img/icon_people.png'
 import iconMoney from '../../assets/img/icon_money.png'
 import '../DetalheChurras/DetalheChurras.css'
-import { people } from '../../utils/people'
+import { peopleList } from '../../utils/people'
 
 import { Input } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const DetalheChurras = () => {
+
+  const navigate = useNavigate();
 
   const [churras, setChurras] = useState('')
   const [title, setTitle] = useState('')
   const [date, setDate] = useState('')
+  const [money, setMoney] = useState(0)
+  const [people, setPeople] = useState([])
 
-  const [checkedState, setCheckedState] = useState(
-    new Array(people.length).fill(false)
-  );
-
-  const [total, setTotal] = useState(0);
-
-  const handleOnChangePeople = (position) => {
-    const updatedCheckedState = checkedState.map((item, index) =>
-      index === position ? !item : item
-    );
-
-    setCheckedState(updatedCheckedState);
-
-    const totalPrice = updatedCheckedState.reduce(
-      (sum, currentState, index) => {
-        if (currentState === true) {
-          return sum + people[index].price;
-        }
-        setChurras({ ...churras, money: churras.money })
-        localStorage.setItem("churras_money", JSON.stringify(sum))
-        return sum;
-      },
-      0
-    );
-
-    setTotal(totalPrice)
+  const handleSelect = (person, price, sum) => {
+    setMoney((prevMoney) => !sum ? prevMoney - price : prevMoney + price)
+    setPeople((prevPeople) => !sum ?
+      prevPeople.filter((prevPerson) => person.id != prevPerson.id
+      ) :
+      [...prevPeople, person])
   };
-
-  const count = checkedState.filter(function (item) {
-    if (item === true) {
-      return true;
-    } else {
-      return false;
-    }
-  }).length;
-
-
-
-  localStorage.setItem("churras_people", JSON.stringify(count))
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (people.length < 1 || !title || !date) {
+      return
+    }
     const existingData = JSON.parse(localStorage.getItem('churras')) || [];
 
-    const newData = {
-      title: title,
-      ...existingData.date,
-      date: date,
-      index: existingData.length,
-    };
+    const newData = [
+      ...existingData, {
+        title,
+        date,
+        index: existingData.length,
+        people,
+        money
+      }
+    ];
 
-    if (Array.isArray(existingData)) {
-      existingData.push(newData);
-      localStorage.setItem('churras', JSON.stringify(existingData));
-    } else {
-      const newDataArray = [newData];
-      localStorage.setItem('churras', JSON.stringify(newDataArray));
-    }
-  };
+    localStorage.setItem('churras', JSON.stringify(newData));
 
-  const handleSubmitData = (e) => {
-    e.preventDefault();
-
-    const existingData = JSON.parse(localStorage.getItem('churras')) || [];
-
-    const newData = {
-      title: title,
-      ...existingData.title,
-      date: date,
-      index: existingData.length,
-    };
-
-    if (Array.isArray(existingData)) {
-      existingData.push(newData);
-      localStorage.setItem('churras', JSON.stringify(existingData));
-    } else {
-      const newDataArray = [newData];
-      localStorage.setItem('churras', JSON.stringify(newDataArray));
-    }
+    navigate('/agenda')
   };
 
   return (
@@ -102,51 +55,49 @@ const DetalheChurras = () => {
         <div className='box__date'>
           <Input
             value={date}
-            onBlur={handleSubmitData}
             onChange={(e) => setDate(e.target.value)}
             className='input-data'
             placeholder='01/02' />
         </div>
         <div className='qtd__people'>
           <img src={iconPeople} alt='people' />
-          <p>{count}</p>
+          <p>{people.length}</p>
         </div>
       </div>
       <div className='box__people title'>
         <div className='box__date'>
           <Input
             value={title}
-            onBlur={handleSubmit}
             onChange={(e) => setTitle(e.target.value)}
             className='input-title'
             placeholder='Niver do Vini' />
         </div>
         <img src={iconMoney} alt='people' />
-        <p>R${total}</p>
+        <p>R${money}</p>
       </div>
       {
-        people.map(({ name, price }, index) => {
+        peopleList.map((person) => {
+          const isSelected = people.find((statePerson) => statePerson.id === person.id)
           return (
-            <div className='box__people under__style' key={index}>
+            <div className='box__people under__style' key={person.id}>
               <div className='box__date'>
                 <input type='checkbox'
-                  checked={checkedState[index]}
-                  id={`custom-checkbox-${index}`}
-                  className={checkedState[index] ? "checked" : ""}
-                  onChange={() => handleOnChangePeople(index)}
-                  value={name}
+                  id={`custom-checkbox-${person.id}`}
+                  className={isSelected ? "checked" : ""}
+                  onChange={(e) => handleSelect(person, person.price, e.currentTarget.checked)}
+                  value={person.name}
                 />
-                <label className='container__label' htmlFor={`custom-checkbox-${index}`}>
-                  {name}
+                <label className='container__label' htmlFor={`custom-checkbox-${person.id}`}>
+                  {person.name}
                 </label>
               </div>
-              <p className={checkedState[index] ? "money check" : 'money'} >{`R$` + price + `,00`}</p>
+              <p className={isSelected ? "money check" : 'money'} >{`R$` + person.price + `,00`}</p>
             </div>
           );
         })}
       <div className='btn__back'>
-        <Link to={'/agenda'} >
-          <a>Voltar para Agenda</a>
+        <Link onClick={handleSubmit} >
+          <a>Confirmar Churras</a>
         </Link>
       </div>
     </div>
