@@ -54,32 +54,46 @@ const DetalheChurras = () => {
   localStorage.setItem("churras_people", JSON.stringify(count))
 
 
-
-  console.log(count)
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const existingData = JSON.parse(localStorage.getItem('churras')) || [];
+
     const newData = {
-      ...existingData,
       title: title,
+      ...existingData.date,
+      date: date,
+      index: existingData.length,
     };
 
-    localStorage.setItem('churras', JSON.stringify(newData));
+    if (Array.isArray(existingData)) {
+      existingData.push(newData);
+      localStorage.setItem('churras', JSON.stringify(existingData));
+    } else {
+      const newDataArray = [newData];
+      localStorage.setItem('churras', JSON.stringify(newDataArray));
+    }
   };
 
   const handleSubmitData = (e) => {
     e.preventDefault();
 
     const existingData = JSON.parse(localStorage.getItem('churras')) || [];
+
     const newData = {
-      ...existingData,
+      title: title,
+      ...existingData.title,
       date: date,
+      index: existingData.length,
     };
 
-    localStorage.setItem('churras', JSON.stringify(newData));
+    if (Array.isArray(existingData)) {
+      existingData.push(newData);
+      localStorage.setItem('churras', JSON.stringify(existingData));
+    } else {
+      const newDataArray = [newData];
+      localStorage.setItem('churras', JSON.stringify(newDataArray));
+    }
   };
 
   return (
