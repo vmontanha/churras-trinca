@@ -17,16 +17,19 @@ const Agenda = () => {
   const churraMoney = JSON.parse(localStorage.getItem("churras_money"));
   const churrasPeople = JSON.parse(localStorage.getItem("churras_people"));
 
+  console.log(churras)
+
+  if (!churras) return
 
   return (
     <>
       {
-        Array.from(localStorage.key).map((index) => {
+        Array.from(churras).map((item) => {
           return (
-            <div className='container__card white' key={index}>
+            <div className='container__card white' key={item.index}>
               <div className='box__title__agenda'>
-                <h2>{churras.date}</h2>
-                <h3>{churras.title}</h3>
+                <h2>{item.date}</h2>
+                <h3>{item.title}</h3>
               </div>
               <div className='box__dados'>
                 <div className='box__people__money__agenda'>
