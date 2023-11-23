@@ -3,6 +3,8 @@ import iconPeople from '../../assets/img/icon_people.png'
 import iconMoney from '../../assets/img/icon_money.png'
 import '../DetalheChurras/DetalheChurras.css'
 import { peopleList } from '../../utils/people'
+import { IMaskInput } from "react-imask";
+import Tooltip from '@mui/material/Tooltip';
 
 import { Input } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
@@ -11,7 +13,7 @@ const DetalheChurras = () => {
 
   const navigate = useNavigate();
 
-  const [churras, setChurras] = useState('')
+  // const [churras, setChurras] = useState('')
   const [title, setTitle] = useState('')
   const [date, setDate] = useState('')
   const [money, setMoney] = useState(0)
@@ -53,11 +55,13 @@ const DetalheChurras = () => {
     <div className='container__list'>
       <div className='box__people'>
         <div className='box__date'>
-          <Input
+          <IMaskInput
+            mask={Date}
+            placeholder="01.02"
             value={date}
             onChange={(e) => setDate(e.target.value)}
             className='input-data'
-            placeholder='01/02' />
+          />
         </div>
         <div className='qtd__people'>
           <img src={iconPeople} alt='people' />
@@ -97,7 +101,14 @@ const DetalheChurras = () => {
         })}
       <div className='btn__back'>
         <Link onClick={handleSubmit} >
-          <a>Confirmar Churras</a>
+          {
+            people.length < 1 || !title || !date ?
+              <Tooltip title="Campos não preenchidos acima 👆" disableInteractive>
+                <a className={people.length < 1 || !title || !date ? "disable" : ''}>Confirmar Churras 😩 </a>
+              </Tooltip>
+              :
+              <a >Confirmar Churras 👍</a>
+          }
         </Link>
       </div>
     </div>

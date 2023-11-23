@@ -32,7 +32,7 @@ const Agenda = () => {
                 </div>
                 <div className='box__people__money__agenda'>
                   <img src={iconMoney} alt='money' />
-                  <p>{item.money}</p>
+                  <p>{`R$` + item.money + `,00`}</p>
                 </div>
               </div>
             </div >
