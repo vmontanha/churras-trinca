@@ -10,7 +10,7 @@ import reportWebVitals from './reportWebVitals';
 import ChurrasList from "./routes/ChurrasList"
 import ChurrasDetail from "./routes/ChurasDetail"
 import LoginPage from "./routes/LoginPage"
-import ErrorPage from './routes/ErrorPage';
+import Error from './routes/Error';
 
 const router = createBrowserRouter([
   {
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
         element: <ChurrasDetail />,
       }
     ],
-    errorElement: <ErrorPage />,
+    errorElement: <Error />,
   },
 ]);
 
